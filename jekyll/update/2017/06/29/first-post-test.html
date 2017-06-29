@@ -84,6 +84,58 @@
 
 <figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="nb">Get-ChildItem</span> -Path <span class="s1">'c:\temp'</span></code></pre></figure>
 
+<noscript><pre>function Export-Log {
+&lt;#
+    .Synopsis
+    Writes tab-separated log messages to a specified file.
+    .DESCRIPTION
+    Writes tab-separated log messages to a specified file.
+    .EXAMPLE
+        Export-Log -messagetype ERROR -logfile c:\temp\log.csv -message &quot;Encountered error performing operation.&quot;
+        Will log an error message to the log located in c:\temp\log.csv
+    .EXAMPLE
+        Export-Log -messagetype INFO -message &quot;Successfully completed operation&quot;
+        Will log an informational only message to the log located in the default location
+    .Parameter MessageType
+        Valid options are WARN, INFO, and ERROR
+    .Parameter LogFile
+        Defaults to the default $logfile parameter of the parent script
+    .Parameter Message
+        Message to log
+#&gt;
+    [cmdletbinding()]
+    param(
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet(&quot;WARN&quot;, &quot;INFO&quot;, &quot;ERROR&quot;)]
+        [parameter(Mandatory=$true)]
+        [string]$MessageType,
+        [parameter(Mandatory=$true)]
+        [string]$Message,
+        [string]$LogFile=$script:LogFile,
+        $delimiter = &quot;`t&quot;
+    )
+
+    switch ($MessageType) {
+        &#39;INFO&#39; {
+            Write-Verbose -Message $Message
+        }
+        &#39;WARN&#39; {
+            Write-Warning -Message $Message
+        }
+        &#39;ERROR&#39; {
+            Write-Error -Message $Message
+        }
+    }
+    [PSCustomObject]@{
+        TimeStamp = $(Get-Date -Format MM/dd/yy-HH:mm:ss)
+        MessageType = $MessageType.ToUpper()
+        Message = $Message
+    } | Export-Csv -Path $LogFile -Delimiter $Delimiter -NoTypeInformation -Append
+}
+</pre></noscript>
+<script src="https://gist.github.com/rodmhgl/70ba6e968dba60d48249359ff920c9ab.js"> </script>
+
 
   </div>
 
