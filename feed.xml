@@ -1,7 +1,144 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-06-29T10:59:05-05:00</updated><id>/</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-06-29T11:14:42-05:00</updated><id>/</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </subtitle><entry><title type="html">First Post with Jekyll!</title><link href="/jekyll/update/2017/06/29/first-post-test.html" rel="alternate" type="text/html" title="First Post with Jekyll!" /><published>2017-06-29T09:15:06-05:00</published><updated>2017-06-29T09:15:06-05:00</updated><id>/jekyll/update/2017/06/29/first-post-test</id><content type="html" xml:base="/jekyll/update/2017/06/29/first-post-test.html">&lt;p&gt;I’m not sure what’s so magical about this post that it worked and my previous post did not.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span class=&quot;nb&quot;&gt;Get-ChildItem&lt;/span&gt; -Path &lt;span class=&quot;s1&quot;&gt;'c:\temp'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cmdletbinding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; 
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Parameter&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    Mandatory &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;,
+    &lt;span class=&quot;nv&quot;&gt;ValueFromPipelineByPropertyName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Group&lt;/span&gt;,
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Parameter&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    Mandatory &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;,
+    &lt;span class=&quot;nv&quot;&gt;ValueFromPipelineByPropertyName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Domain&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;Begin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Loading Functions&quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;Function &lt;/span&gt;Connect-ExchangeOnline &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;!&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;get-pssession | &lt;span class=&quot;nb&quot;&gt;Where-Object&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;.ConfigurationName -match &lt;span class=&quot;s2&quot;&gt;&quot;Microsoft.Exchange&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;$UserCredential&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Get-Credential&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;$SessionProps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; @&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;'ConfigurationName'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Microsoft.Exchange'&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;'ConnectionURI'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://outlook.office365.com/powershell-liveid/'&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;'Credential'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$UserCredential&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;'Authentication'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Basic'&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;'AllowRedirection'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+        &lt;span class=&quot;nv&quot;&gt;$Session&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; New-PSSession @SessionProps -ErrorAction Stop
+        Import-PSSession -Session &lt;span class=&quot;nv&quot;&gt;$Session&lt;/span&gt; -AllowClobber -ErrorAction Stop
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Write-Error&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Unable to connect or import remote session. Exiting...&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;n &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;; Exit}
+      
+      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:DistributionGroups = Get-DistributionGroup -ResultSize 'Unlimited'
+    }
+  }
+  Function Get-OnPremProxyAddresses {
+    [cmdletbinding()]
+    param(
+      [Parameter(Mandatory)]
+      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Group&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;,
+      [Parameter(Mandatory)]
+      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Domain&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;
+    )
+    switch (&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$domain&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;) {
+      'TCEH' { &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = 'tceh.net' }
+      'TXU' { &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = 'txuenergy.net' }
+      'Vistra' { &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = 'txuenergy.net' }
+      Default { &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$domain&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; }
+    }
+    Write-Verbose -Message &quot;&lt;/span&gt;Searching &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;the &lt;span class=&quot;nv&quot;&gt;$domain&lt;/span&gt; domain &lt;span class=&quot;k&quot;&gt;using &lt;/span&gt;DC &lt;span class=&quot;nv&quot;&gt;$server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;
+    try { 
+       &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = Get-ADGroup -Filter &quot;&lt;/span&gt;Name -eq &lt;span class=&quot;s1&quot;&gt;'$($Group)'&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot; -Properties mail, proxyaddresses -Server &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -ErrorAction Stop
+#      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = Get-ADGroup &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Group&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -Properties mail, proxyaddresses -Server &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -ErrorAction Stop
+#      if  (! &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;) { &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; = Get-ADGroup -Filter &quot;&lt;/span&gt;Name -eq &lt;span class=&quot;s1&quot;&gt;'$($Group)'&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot; -Properties mail, proxyaddresses -Server &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Server&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -ErrorAction Stop }
+      Write-Verbose -Message &quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Group&lt;/span&gt; Found.&lt;span class=&quot;s2&quot;&gt;&quot;
+    }
+    catch { &quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$group&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;t Error locating on-premise&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nv&quot;&gt;$Object&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;PSCustomObject]@&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;'GroupName'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;.samaccountname
+      &lt;span class=&quot;s1&quot;&gt;'PrimarySMTPAddress'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADgroup&lt;/span&gt;.mail
+      &lt;span class=&quot;s1&quot;&gt;'ProxyAddresses'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;.proxyaddresses
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Object&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;Function &lt;/span&gt;Get-CloudProxyAddresses &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cmdletbinding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Parameter&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ParameterSetName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;DisplayName&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DisplayName&lt;/span&gt;,
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Parameter&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ParameterSetName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Identity&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Identity&lt;/span&gt;,
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Parameter&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ParameterSetName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ADGroupObject&quot;&lt;/span&gt;,
+        &lt;span class=&quot;nv&quot;&gt;ValueFromPipeline&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;PSCustomObject]&lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;$saved&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;:ErrorActionPreference
+      &lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;:ErrorActionPreference&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'stop'&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PSCmdlet&lt;/span&gt;.ParameterSetName -eq &lt;span class=&quot;s2&quot;&gt;&quot;DisplayName&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$DisplayName&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Querying for Cloud DL via DisplayName - &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$CloudDL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;:DistributionGroups.where&lt;span class=&quot;o&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;.DisplayName -eq &lt;span class=&quot;nv&quot;&gt;$DisplayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,&lt;span class=&quot;s1&quot;&gt;'First'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Group Found&quot;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;elseif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PSCmdlet&lt;/span&gt;.ParameterSetName -eq &lt;span class=&quot;s2&quot;&gt;&quot;Identity&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$Identity&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Querying for Cloud DL via Identity - &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$CloudDL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Get-DistributionGroup -Identity &lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt; -ErrorAction Stop
+        &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Group Found&quot;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;elseif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PSCmdlet&lt;/span&gt;.ParameterSetName -eq &lt;span class=&quot;s2&quot;&gt;&quot;ADGroupObject&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;.PrimarySMTPAddress
+        &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Querying for Cloud DL via On-Prem SMTP - &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$CloudDL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Get-DistributionGroup -Identity &lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt; -ErrorAction Stop &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;No SMTP&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Online Group Found - &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CloudGroup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+        &lt;span class=&quot;c1&quot;&gt;#Write-Error &quot;$Group `t Unable to locate Cloud&quot;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;Write-Error&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Unable to locate cloud group - &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;.GroupName&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;. &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;:ErrorActionPreference&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$saved&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Object&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;PSCustomObject]@&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;'ADGroup'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ADGroup&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;'CloudGroup'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$CloudDL&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Object&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;Function &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;-CloudProxyAddresses &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cmdletbinding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Parameter&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Mandatory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$true&lt;/span&gt;,ValueFromPipeline&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;PSCustomObject]&lt;span class=&quot;nv&quot;&gt;$InputObject&lt;/span&gt; 
+    &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+      &lt;span class=&quot;nv&quot;&gt;$saved&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;:ErrorActionPreference
+      &lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;:ErrorActionPreference&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'stop'&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Attempting to add proxyaddresses to group - &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$InputObject&lt;/span&gt;.CloudGroup.DisplayName&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Proxy Addresses - &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$InputObject&lt;/span&gt;.ADGroup.ProxyAddresses&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;-DistributionGroup -Identity &lt;span class=&quot;nv&quot;&gt;$InputObject&lt;/span&gt;.CloudGroup.PrimarySMTPAddress -EmailAddresses &lt;span class=&quot;nv&quot;&gt;$InputObject&lt;/span&gt;.ADGroup.ProxyAddresses -ErrorAction Stop
+      &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Added proxyaddresses to group - &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$InputObject&lt;/span&gt;.CloudGroup.DisplayName&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#Write-Error &quot;$group `t Error setting proxyaddress&quot;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;Write-Error&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Error setting ProxyAddresses for &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$InputObject&lt;/span&gt;.ADGroup.GroupName&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; - &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$global&lt;/span&gt;:ErrorActionPreference&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$saved&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Attempting connection to Exchange Online&quot;&lt;/span&gt;
+  Connect-ExchangeOnline
+  &lt;span class=&quot;nb&quot;&gt;Write-Verbose&lt;/span&gt; -Message &lt;span class=&quot;s2&quot;&gt;&quot;Connected to Exchange - Proceeding&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;Process&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;    
+  &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; Get-OnPremProxyAddresses -Group &lt;span class=&quot;nv&quot;&gt;$Group&lt;/span&gt; -Domain &lt;span class=&quot;nv&quot;&gt;$Domain&lt;/span&gt; | Get-CloudProxyAddresses | &lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;-CloudProxyAddresses &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Write-Error&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Error: &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;End&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;noscript&gt;&lt;pre&gt;function Export-Log {
 &amp;lt;#
